@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+// import Story from './component/Story';
 
 class TopStories extends Component {
-
-
   render() {
     let storyList = this.props.topStories.map((story, i) => {
-      //console.log(story);
       return (
-        <li key={i}>{story.topArticleTitle}</li>
+        <li key={i} onClick={ () => this.props.setStories(i) }>
+          {story.topArticleTitle}
+        </li>
       );
     });
     return (
