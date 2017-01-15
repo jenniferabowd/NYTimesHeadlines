@@ -5,6 +5,7 @@ import MyList from './component/MyList';
 import Notes from './component/Notes';
 import TopStories from './component/TopStories';
 import Story from './component/Story';
+import MyStoryListItem from './component/MyStoryListItem';
 
 class App extends Component {
   constructor(props) {
@@ -12,15 +13,22 @@ class App extends Component {
     this.state = {
       topStories: [],
       currentStoryUrl: '',
+      currentStoryTitle: '',
+      myListArr: [],
+      myListStory: '',
     }
     this.setStories = this.setStories.bind(this);
+    this.addToList = this.addToList.bind(this);
+    this.getRequestNYT = this.getRequestNYT.bind(this);
+    this.getRequestFirebase = this.getRequestFirebase.bind(this);
   }
 
   componentDidMount() {
-    this.getRequest();
+    this.getRequestNYT();
+    this.getRequestFirebase();
   }
 
-  getRequest() {
+  getRequestNYT() {
     const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
     axios.get(nyTimesUrl)
       .then((response) => {
@@ -29,7 +37,7 @@ class App extends Component {
           if(data) {
             topStories = Object.keys(data).map((id) => {
               const story = data[id];
-              console.log(story);
+              // console.log(story);
               return {
                 id: id,
                 topArticleTitle: story.title,
@@ -43,9 +51,54 @@ class App extends Component {
        });
   }
 
+  getRequestFirebase() {
+    const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
+    axios.get(firebaseURL)
+      .then((response) => {
+        console.log(response);
+        const data = response.data;
+        let myListArr = [];
+          if(data) {
+            myListArr = Object.keys(data).map((id) => {
+              const myListStory = data[id];
+              return {
+                id: id,
+                myListStory: this.state.currentStoryTitle
+              }
+            });
+          }
+          this.setState({ myListArr })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
+
   setStories(i) {
-    this.setState({ currentStoryUrl: this.state.topStories[i].storyUrl})
+    this.setState({
+      currentStoryUrl: this.state.topStories[i].storyUrl,
+      currentStoryTitle: this.state.topStories[i].topArticleTitle
+    })
   }
+
+  addToList(myListStory) {
+    console.log(myListStory)
+    console.log('clicked')
+    const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
+    axios.post(firebaseURL, {
+      article: this.state.currentStoryTitle
+    })
+      .then(() => {
+        this.getRequestFirebase();
+        this.setState({
+          // myListArr: [],
+          myListStory: this.state.currentStoryTitle
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
 
 
   render() {
@@ -59,12 +112,30 @@ class App extends Component {
           <Story
             topStories={this.state.topStories}
             currentStoryUrl={this.state.currentStoryUrl}
+            addToList={this.addToList}
+            getRequestNYT={this.getRequestNYT}
             setStories={this.setStories}
+            currentStoryTitle={this.state.currentStoryTitle}
+            myListStory={this.state.myListStory}
           />
         </div>
         <div className="myListNotes">
-          <MyList />
-          <Notes />
+          <div>
+            <MyList
+              myListArr={this.state.myListArr}
+              myListStory={this.state.myListStory}
+              addToList={this.addToList}
+              setStories={this.setStories}
+              currentStoryTitle={this.state.currentStoryTitle}
+              myListStory={this.state.myListStory}
+            />
+            {/*<MyStoryListItem
+              myList={this.state.myListArr}
+              myListStory={this.state.myListStory}
+              addToList={this.addToList}
+            />*/}
+            <Notes />
+          </div>
         </div>
       </div>
     );

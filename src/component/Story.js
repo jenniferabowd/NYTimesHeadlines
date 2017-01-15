@@ -13,7 +13,9 @@ class Story extends Component {
           <div>
             <h1>Story</h1>
             <div>{viewStory}</div>
-                <button>Add to List</button>
+                <button onClick={ () => this.props.addToList(this.props.currentStoryTitle)}>
+                  Add to List
+                </button>
           </div>
         );
     } else {
