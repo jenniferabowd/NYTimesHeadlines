@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Story from './component/Story';
 
-class TopStories extends Component {
+class TopStories extends React.Component {
   render() {
     let storyList = this.props.topStories.map((story, i) => {
       return (

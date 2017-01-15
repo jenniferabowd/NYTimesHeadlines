@@ -21,6 +21,7 @@ class App extends Component {
     this.addToList = this.addToList.bind(this);
     this.getRequestNYT = this.getRequestNYT.bind(this);
     this.getRequestFirebase = this.getRequestFirebase.bind(this);
+    this.deleteStory = this.deleteStory.bind(this)
   }
 
   componentDidMount() {
@@ -29,7 +30,7 @@ class App extends Component {
   }
 
   getRequestNYT() {
-    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
+    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=24a8cf49ab2649bba4126888236dc793'
     axios.get(nyTimesUrl)
       .then((response) => {
         const data = response.data.results;
@@ -51,11 +52,18 @@ class App extends Component {
        });
   }
 
+  setStories(i) {
+    this.setState({
+      currentStoryUrl: this.state.topStories[i].storyUrl,
+      currentStoryTitle: this.state.topStories[i].topArticleTitle
+    })
+  }
+
   getRequestFirebase() {
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.get(firebaseURL)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const data = response.data;
         let myListArr = [];
           if(data) {
@@ -63,7 +71,7 @@ class App extends Component {
               const myListStory = data[id];
               return {
                 id: id,
-                myListStory: this.state.currentStoryTitle
+                myListStory: data[id].article
               }
             });
           }
@@ -74,16 +82,10 @@ class App extends Component {
       })
   };
 
-  setStories(i) {
-    this.setState({
-      currentStoryUrl: this.state.topStories[i].storyUrl,
-      currentStoryTitle: this.state.topStories[i].topArticleTitle
-    })
-  }
 
   addToList(myListStory) {
-    console.log(myListStory)
-    console.log('clicked')
+    // console.log(myListStory)
+    // console.log('clicked')
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.post(firebaseURL, {
       article: this.state.currentStoryTitle
@@ -91,7 +93,6 @@ class App extends Component {
       .then(() => {
         this.getRequestFirebase();
         this.setState({
-          // myListArr: [],
           myListStory: this.state.currentStoryTitle
         })
       })
@@ -99,6 +100,15 @@ class App extends Component {
         console.log(error);
       })
   };
+
+  deleteStory(myListStory) {
+    console.log(myListStory, 'This is delete')
+    console.log('clicked delete')
+    axios.delete(`https://ny-times-app.firebaseio.com/mylist/${myListStory.id}/.json`)
+    .then((response) => {
+      this.getRequestFirebase();
+    });
+  }
 
 
   render() {
@@ -128,12 +138,8 @@ class App extends Component {
               setStories={this.setStories}
               currentStoryTitle={this.state.currentStoryTitle}
               myListStory={this.state.myListStory}
+              deleteStory={this.deleteStory}
             />
-            {/*<MyStoryListItem
-              myList={this.state.myListArr}
-              myListStory={this.state.myListStory}
-              addToList={this.addToList}
-            />*/}
             <Notes />
           </div>
         </div>

@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 
-class myStoryListItem extends Component {
+class MyStoryListItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  handleDelete() {
+    this.props.deleteStory(this.props.myListStory);
+  }
+
   render() {
-    let article;
-    if (this.props.myListStory) {
-       article = this.props.myListStory;
-    }
     return(
       <li>
-        {article}
+        {this.props.myListStory.myListStory}
+        <button onClick={this.handleDelete}>Delete</button>
       </li>
     );
   }
 }
 
-export default myStoryListItem;
+export default MyStoryListItem;

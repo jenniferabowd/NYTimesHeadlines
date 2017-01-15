@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Story extends Component {
+class Story extends React.Component {
   render() {
     let viewStory;
     if(this.props.currentStoryUrl) {
@@ -13,7 +13,7 @@ class Story extends Component {
           <div>
             <h1>Story</h1>
             <div>{viewStory}</div>
-                <button onClick={ () => this.props.addToList(this.props.currentStoryTitle)}>
+                <button onClick={ () => this.props.addToList(this.props.myListStory)}>
                   Add to List
                 </button>
           </div>
