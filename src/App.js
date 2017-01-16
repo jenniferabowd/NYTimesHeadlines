@@ -43,7 +43,6 @@ class App extends Component {
           if(data) {
             topStories = Object.keys(data).map((id) => {
               const story = data[id];
-              // console.log(story);
               return {
                 id: id,
                 topArticleTitle: story.title,
@@ -73,7 +72,6 @@ class App extends Component {
         let myListArr = [];
           if(data) {
             myListArr = Object.keys(data).map((id) => {
-              // const myListStory = data[id];
               return {
                 id: id,
                 myListStory: data[id].article
@@ -88,8 +86,6 @@ class App extends Component {
   };
 
   addToList(myListStory) {
-    // console.log(myListStory)
-    // console.log('clicked')
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.post(firebaseURL, {
       article: this.state.currentStoryTitle,
@@ -107,8 +103,6 @@ class App extends Component {
   };
 
   deleteStory(myListStory) {
-    // console.log(myListStory, 'This is delete')
-    // console.log('clicked delete')
     axios.delete(`https://ny-times-app.firebaseio.com/mylist/${myListStory.id}/.json`)
     .then((response) => {
       this.getRequestFirebase();
@@ -147,22 +141,14 @@ class App extends Component {
             setStories={this.setStories}
           />
           <Story
-            // topStories={this.state.topStories}
             currentStoryUrl={this.state.currentStoryUrl}
             addToList={this.addToList}
-            // getRequestNYT={this.getRequestNYT}
-            // setStories={this.setStories}
-            // currentStoryTitle={this.state.currentStoryTitle}
             myListStory={this.state.myListStory}
           />
         </div>
         <div className="myListNotes">
           <MyList
             myListArr={this.state.myListArr}
-            // addToList={this.addToList}
-            // setStories={this.setStories}
-            // currentStoryTitle={this.state.currentStoryTitle}
-            // myListStory={this.state.myListStory}
             deleteStory={this.deleteStory}
             enableEditMode={this.enableEditMode}
             addNote={this.addNote}
