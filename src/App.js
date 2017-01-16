@@ -82,13 +82,13 @@ class App extends Component {
       })
   };
 
-
   addToList(myListStory) {
     // console.log(myListStory)
     // console.log('clicked')
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.post(firebaseURL, {
-      article: this.state.currentStoryTitle
+      article: this.state.currentStoryTitle,
+      note: ''
     })
       .then(() => {
         this.getRequestFirebase();
@@ -102,19 +102,26 @@ class App extends Component {
   };
 
   deleteStory(myListStory) {
-    console.log(myListStory, 'This is delete')
-    console.log('clicked delete')
+    // console.log(myListStory, 'This is delete')
+    // console.log('clicked delete')
     axios.delete(`https://ny-times-app.firebaseio.com/mylist/${myListStory.id}/.json`)
     .then((response) => {
       this.getRequestFirebase();
     });
   }
 
+  // addNote() {
+  //   axios.patch(`https://ny-times-app.firebaseio.com/mylist/${note.id}/.json`)
+  //   .then((response) => {
+
+  //   });
+
+  // }
 
   render() {
     return (
       <div className="App">
-        <div className="Stories">
+        <div className="stories">
           <TopStories
             topStories={this.state.topStories}
             setStories={this.setStories}
@@ -130,18 +137,16 @@ class App extends Component {
           />
         </div>
         <div className="myListNotes">
-          <div>
-            <MyList
-              myListArr={this.state.myListArr}
-              myListStory={this.state.myListStory}
-              addToList={this.addToList}
-              setStories={this.setStories}
-              currentStoryTitle={this.state.currentStoryTitle}
-              myListStory={this.state.myListStory}
-              deleteStory={this.deleteStory}
-            />
-            <Notes />
-          </div>
+          <MyList
+            myListArr={this.state.myListArr}
+            myListStory={this.state.myListStory}
+            addToList={this.addToList}
+            setStories={this.setStories}
+            currentStoryTitle={this.state.currentStoryTitle}
+            myListStory={this.state.myListStory}
+            deleteStory={this.deleteStory}
+          />
+          <Notes />
         </div>
       </div>
     );

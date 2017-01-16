@@ -14,6 +14,7 @@ class MyStoryListItem extends React.Component {
     return(
       <li>
         {this.props.myListStory.myListStory}
+        <button>Add Note</button>
         <button onClick={this.handleDelete}>Delete</button>
       </li>
     );
