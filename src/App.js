@@ -16,12 +16,17 @@ class App extends Component {
       currentStoryTitle: '',
       myListArr: [],
       myListStory: '',
+      notes: [],
+      note: '',
     }
     this.setStories = this.setStories.bind(this);
     this.addToList = this.addToList.bind(this);
     this.getRequestNYT = this.getRequestNYT.bind(this);
     this.getRequestFirebase = this.getRequestFirebase.bind(this);
-    this.deleteStory = this.deleteStory.bind(this)
+    this.deleteStory = this.deleteStory.bind(this);
+    // this.enableEditMode = this.enableEditMode.bind(this);
+    // this.addNote = this.addNote.bind(this);
+    // this.updateCurrentNote = this.updateCurrentNote.bind(this);
   }
 
   componentDidMount() {
@@ -68,7 +73,7 @@ class App extends Component {
         let myListArr = [];
           if(data) {
             myListArr = Object.keys(data).map((id) => {
-              const myListStory = data[id];
+              // const myListStory = data[id];
               return {
                 id: id,
                 myListStory: data[id].article
@@ -110,12 +115,27 @@ class App extends Component {
     });
   }
 
-  // addNote() {
-  //   axios.patch(`https://ny-times-app.firebaseio.com/mylist/${note.id}/.json`)
-  //   .then((response) => {
+  // addNote(noteId) {
+  //   this.setState({ currentNote: noteId });
+  // }
 
-  //   });
+  // enableEditMode() {
+  //   this.setState({ edit: true });
+  // }
 
+  // updateCurrentNote() {
+  //   axios.patch({
+  //     url: '/mylist/${note}/.json',
+  //     baseURL: 'https://ny-times-app.firebaseio.com/',
+  //     method: "PATCH",
+  //     data: currentNote
+  //     }).then((response) => {
+  //     let notes = this.state.notes;
+  //     notes[id] = currentNote;
+  //     this.setState({ notes: notes, edit: false })
+  //   }).catch((error) => {
+  //     console.log(error);
+  //   })
   // }
 
   render() {
@@ -127,24 +147,25 @@ class App extends Component {
             setStories={this.setStories}
           />
           <Story
-            topStories={this.state.topStories}
+            // topStories={this.state.topStories}
             currentStoryUrl={this.state.currentStoryUrl}
             addToList={this.addToList}
-            getRequestNYT={this.getRequestNYT}
-            setStories={this.setStories}
-            currentStoryTitle={this.state.currentStoryTitle}
+            // getRequestNYT={this.getRequestNYT}
+            // setStories={this.setStories}
+            // currentStoryTitle={this.state.currentStoryTitle}
             myListStory={this.state.myListStory}
           />
         </div>
         <div className="myListNotes">
           <MyList
             myListArr={this.state.myListArr}
-            myListStory={this.state.myListStory}
-            addToList={this.addToList}
-            setStories={this.setStories}
-            currentStoryTitle={this.state.currentStoryTitle}
-            myListStory={this.state.myListStory}
+            // addToList={this.addToList}
+            // setStories={this.setStories}
+            // currentStoryTitle={this.state.currentStoryTitle}
+            // myListStory={this.state.myListStory}
             deleteStory={this.deleteStory}
+            enableEditMode={this.enableEditMode}
+            addNote={this.addNote}
           />
           <Notes />
         </div>

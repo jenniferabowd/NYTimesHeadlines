@@ -11,6 +11,8 @@ class MyList extends React.Component {
           key={i}
           myListStory={myListStory}
           deleteStory={this.props.deleteStory}
+          enableEditMode={this.enableEditMode}
+          addNote={this.addNote}
         />
       );
     });
@@ -18,9 +20,9 @@ class MyList extends React.Component {
     return(
       <div>
         <h1>My List</h1>
-        <ul>
+        <ol>
             {myListLi}
-        </ul>
+        </ol>
       </div>
     );
   }
