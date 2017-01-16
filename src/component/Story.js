@@ -25,7 +25,7 @@ class Story extends React.Component {
         <div>
           <h1>Story</h1>
           <div>
-            <h3>Click on an article name to read the story</h3>
+            <h3>Click on an article name to learn more</h3>
           </div>
         </div>
       )

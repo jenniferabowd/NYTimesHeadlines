@@ -12,8 +12,8 @@ class MyList extends React.Component {
           enableEditMode={this.enableEditMode}
           addNote={this.addNote}
           editCurrentNote={this.editCurrentNote}
-          // notes={this.state.notes}
-          // note={this.state.note}
+          notes={this.props.notes}
+          note={this.props.note}
         />
       );
     });

@@ -12,7 +12,6 @@ class TopStories extends React.Component {
     });
     return (
       <div>
-        <h1>Top Stories</h1>
         <ol>
           {storyList}
         </ol>
