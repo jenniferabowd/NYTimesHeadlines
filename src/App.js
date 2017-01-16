@@ -5,7 +5,6 @@ import MyList from './component/MyList';
 import Notes from './component/Notes';
 import TopStories from './component/TopStories';
 import Story from './component/Story';
-import MyStoryListItem from './component/MyStoryListItem';
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +13,7 @@ class App extends Component {
       topStories: [],
       currentStoryUrl: '',
       currentStoryTitle: '',
+      currentStoryAbstract: '',
       myListArr: [],
       myListStory: '',
       notes: [],
@@ -24,9 +24,9 @@ class App extends Component {
     this.getRequestNYT = this.getRequestNYT.bind(this);
     this.getRequestFirebase = this.getRequestFirebase.bind(this);
     this.deleteStory = this.deleteStory.bind(this);
-    // this.enableEditMode = this.enableEditMode.bind(this);
-    // this.addNote = this.addNote.bind(this);
-    // this.updateCurrentNote = this.updateCurrentNote.bind(this);
+    this.enableEditMode = this.enableEditMode.bind(this);
+    this.addNote = this.addNote.bind(this);
+    this.editCurrentNote = this.editCurrentNote.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +47,7 @@ class App extends Component {
                 id: id,
                 topArticleTitle: story.title,
                 storyUrl: story.url,
+                abstract: story.abstract,
               }
              });
           }
@@ -59,7 +60,8 @@ class App extends Component {
   setStories(i) {
     this.setState({
       currentStoryUrl: this.state.topStories[i].storyUrl,
-      currentStoryTitle: this.state.topStories[i].topArticleTitle
+      currentStoryTitle: this.state.topStories[i].topArticleTitle,
+      currentStoryAbstract: this.state.topStories[i].abstract,
     })
   }
 
@@ -109,28 +111,59 @@ class App extends Component {
     });
   }
 
-  // addNote(noteId) {
-  //   this.setState({ currentNote: noteId });
-  // }
+  addNote(noteIext) {
+    this.setState({ note: noteIext });
+  }
 
-  // enableEditMode() {
-  //   this.setState({ edit: true });
-  // }
+  enableEditMode() {
+    this.setState({ edit: true });
+  }
 
-  // updateCurrentNote() {
-  //   axios.patch({
-  //     url: '/mylist/${note}/.json',
-  //     baseURL: 'https://ny-times-app.firebaseio.com/',
-  //     method: "PATCH",
-  //     data: currentNote
-  //     }).then((response) => {
-  //     let notes = this.state.notes;
-  //     notes[id] = currentNote;
-  //     this.setState({ notes: notes, edit: false })
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   })
-  // }
+  editCurrentNote(noteText) {
+    let newNote = { note: noteText};
+    newNote.note = this.refs.editNoteInput;
+    axios.patch({
+      url: '/mylist/${note}/.json',
+      baseURL: 'https://ny-times-app.firebaseio.com/',
+      method: "PATCH",
+      data: newNote,
+      }).then((response) => {
+      let notes = this.state.note;
+      let i = response.data.name;
+      notes[i] = newNote;
+      this.setState({ notes: notes, edit: false });
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+  renderSelectedNote() {
+    let content;
+
+    if (this.state.newNote) {
+      let newNote = this.state.notes[this.state.newNote];
+      if(!this.state.edit) {
+        content = (
+          <div>
+            <div className="d-flex justify-content-end mb-3">
+              <button onClick={this.enableEditMode}>Edit</button>
+            </div>
+            <h1>{newNote.note}</h1>
+          </div>
+        );
+      } else {
+        content = (
+          <div>
+            <div className="d-flex justify-content-end mb-3">
+              <button onClick={this.editCurrentNote}>Save</button>
+            </div>
+            <input className="w-100" defaultValue={newNote.note} ref="editNoteInput"/>
+          </div>
+        );
+      }
+    }
+    return content;
+  }
 
   render() {
     return (
@@ -141,6 +174,8 @@ class App extends Component {
             setStories={this.setStories}
           />
           <Story
+            currentStoryAbstract={this.state.currentStoryAbstract}
+            currentStoryTitle={this.state.currentStoryTitle}
             currentStoryUrl={this.state.currentStoryUrl}
             addToList={this.addToList}
             myListStory={this.state.myListStory}
@@ -152,6 +187,11 @@ class App extends Component {
             deleteStory={this.deleteStory}
             enableEditMode={this.enableEditMode}
             addNote={this.addNote}
+            editCurrentNote={this.editCurrentNote}
+            // notes={this.state.notes}
+            // note={this.state.note}
+
+
           />
           <Notes />
         </div>

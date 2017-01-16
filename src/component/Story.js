@@ -5,9 +5,11 @@ class Story extends React.Component {
     let viewStory;
     if(this.props.currentStoryUrl) {
       viewStory = (
-        <iframe src={this.props.currentStoryUrl}>
-        console.log(this.props.currentStoryUrl)
-        </iframe>
+        <div>
+          <p>{this.props.currentStoryTitle}</p>
+          <p>{this.props.currentStoryAbstract}</p>
+          <a href={this.props.currentStoryUrl}>{this.props.currentStoryUrl}</a>
+        </div>
       )
         return (
           <div>
