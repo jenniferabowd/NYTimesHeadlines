@@ -25,7 +25,7 @@ class App extends Component {
     this.addToList = this.addToList.bind(this);
     this.deleteStory = this.deleteStory.bind(this);
     this.addNote = this.addNote.bind(this);
-    this.enableEditMode = this.enableEditMode.bind(this);
+    // this.enableEditMode = this.enableEditMode.bind(this);
     this.editCurrentNote = this.editCurrentNote.bind(this);
     // this.renderSelectedNote = this.renderSelectedNote.bind(this);
   }
@@ -117,14 +117,14 @@ class App extends Component {
     this.setState({ note: noteIext });
   }
 
-  enableEditMode() {
-    this.setState({ edit: true });
-  }
+  // enableEditMode() {
+  //   this.setState({ edit: true });
+  // }
 
   editCurrentNote(noteText) {
     let newNote = { note: noteText};
     newNote.note = this.refs.editNoteInput;
-    axios.patch({
+    axios({
       url: '/mylist/${note}/.json',
       baseURL: 'https://ny-times-app.firebaseio.com/',
       method: "PATCH",
@@ -201,7 +201,7 @@ class App extends Component {
           <MyList
             myListArr={this.state.myListArr}
             deleteStory={this.deleteStory}
-            enableEditMode={this.enableEditMode}
+            // enableEditMode={this.enableEditMode}
             addNote={this.addNote}
             editCurrentNote={this.editCurrentNote}
             notes={this.state.notes}

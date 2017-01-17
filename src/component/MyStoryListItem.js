@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 
 class MyStoryListItem extends React.Component {
   constructor(props) {
+    console.log('constructing mystorylist');
     super(props)
+    this.state = {
+      edit: false,
+    }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    // this.enableEditMode = this.enableEditMode.bind(this);
     this.renderSelectedNote = this.renderSelectedNote.bind(this);
   }
 
@@ -13,50 +18,55 @@ class MyStoryListItem extends React.Component {
   }
 
   handleEdit() {
-    this.props.editCurrentNote(this.props.note);
+    this.setState({ edit: !(this.state.edit) });
+    console.log(this.state);
   }
+
+  // enableEditMode() {
+  //   if (this.state.edit === false){
+  //       this.setState({ edit: true });
+  //     } else {
+  //       this.setState({ edit: false });
+  //     }
+  // }
 
   renderSelectedNote() {
     let content;
-    let myNotesLi = this.props.notes.map((note, i) => {
+    // let myNotesLi = this.props.notes.map((note, i) => {
 
-    if (this.props.enableEditMode === false) {
+    if (this.state.edit === false) {
       // let newNote = this.props.notes[this.props.newNote];
       // if(!this.props.edit) {
         content = (
-           <li>
-            {this.props.myListStory.myListStory}
-            <button onClick={this.handleEdit}>Add Note</button>
-            <button onClick={this.handleDelete}>Delete</button>
-            <ul>
-              <li>{this.props.notes[i].note}</li>
-              <button onClick={this.enableEditMode}>Edit</button>
-            </ul>
-          </li>
+          <div>
+            <p>{this.props.notes.myNotesP}</p>
+          </div>
         );
       // }
     } else {
         content = (
-           <li>
-            {this.props.myListStory.myListStory}
-            <button onClick={this.handleEdit}>Add Note</button>
-            <button onClick={this.handleDelete}>Delete</button>
-              <div>
-                <input defaultValue={this.props.notes[i].note} ref="editNoteInput"/>
-                <button onClick={this.editCurrentNote}>Save</button>
-              </div>
-          </li>
+          <div>
+            <input defaultValue={this.props.notes.myNotesLi} ref="editNoteInput"/>
+            { <button onClick={this.editCurrentNote}>Save</button> }
+          </div>
+          // this.setState({ edit: false });
         );
+        // this.setState({ edit: false });
       }
-    });
+    // });
+    // this.setState({ edit: false });
     return content;
+    // this.setState({ edit: false });
   }
 
    render() {
     return(
-      <div>
-      {this.renderSelectedNote()}
-      </div>
+        <li>
+          {this.props.myListStory.myListStory}
+          <button onClick={this.handleEdit}>Edit Note</button>
+          <button onClick={this.handleDelete}>Delete</button>
+          {this.renderSelectedNote()}
+        </li>
     );
   }
 }

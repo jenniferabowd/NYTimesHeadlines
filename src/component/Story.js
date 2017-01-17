@@ -13,7 +13,7 @@ class Story extends React.Component {
       )
         return (
           <div>
-            <h1>Story</h1>
+            <h1>Selected Story</h1>
             <div>{viewStory}</div>
                 <button onClick={ () => this.props.addToList(this.props.myListStory)}>
                   Add to List
@@ -22,7 +22,7 @@ class Story extends React.Component {
         );
     } else {
       return (
-        <div>
+        <div className="story">
           <h1>Story</h1>
           <div>
             <h3>Click on an article name to learn more</h3>
