@@ -114,22 +114,21 @@ class App extends Component {
     this.setState({ note: noteIext });
   }
 
-  editCurrentNote(noteText) {
-    let newNote = { note: noteText};
-    newNote.note = this.refs.editNoteInput;
+  editCurrentNote(myListStory, newNote, index) {
+    console.log(newNote);
     axios({
-      url: '/mylist/${note}/.json',
+      url: `/mylist/${myListStory.id}.json`,
       baseURL: 'https://ny-times-app.firebaseio.com/',
       method: "PATCH",
-      data: newNote,
+      data: {note: newNote},
       }).then((response) => {
-      let notes = this.state.note;
-      let i = response.data.name;
-      notes[i] = newNote;
-      this.setState({
-        notes: notes,
-        edit: false
-      });
+      let myNewListArr = [...this.state.myListArr];
+      myNewListArr[index].note = newNote;
+      console.log(myNewListArr);
+    this.setState({
+      myListArr: myNewListArr,
+      edit: false,
+    });
     }).catch((error) => {
       console.log(error);
     })
@@ -159,6 +158,7 @@ class App extends Component {
             />
           </div>
         </div>
+        <br />
         <h1>My List</h1>
         <div className="myListNotes">
           <MyList

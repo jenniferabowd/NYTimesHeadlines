@@ -10,6 +10,7 @@ class MyStoryListItem extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.renderSelectedNote = this.renderSelectedNote.bind(this);
+    // console.log(props);
   }
 
   handleDelete() {
@@ -18,7 +19,7 @@ class MyStoryListItem extends React.Component {
 
   handleEdit() {
     this.setState({ edit: !(this.state.edit) });
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   renderSelectedNote() {
@@ -33,8 +34,8 @@ class MyStoryListItem extends React.Component {
     } else {
         content = (
           <div>
-            <input defaultValue={this.props.note} ref="editNoteInput"/>
-            <button className="btn btn-warning btn-xs" onClick={this.props.editCurrentNote}>
+            <input defaultValue={this.props.note} ref={(input) => this.input = input}/>
+            <button className="btn btn-warning btn-xs" onClick={() => {this.props.editCurrentNote(this.props.myListStory, this.input.value, this.props.index)} }>
               Save
               {" "}
               <span className="glyphicon glyphicon-piggy-bank" aria-hidden="true">
