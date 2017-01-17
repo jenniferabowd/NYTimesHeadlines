@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Story from './component/Story';
 
 class TopStories extends React.Component {
   render() {

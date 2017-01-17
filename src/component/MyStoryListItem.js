@@ -9,7 +9,6 @@ class MyStoryListItem extends React.Component {
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
-    // this.enableEditMode = this.enableEditMode.bind(this);
     this.renderSelectedNote = this.renderSelectedNote.bind(this);
   }
 
@@ -22,36 +21,28 @@ class MyStoryListItem extends React.Component {
     console.log(this.state);
   }
 
-  // enableEditMode() {
-  //   if (this.state.edit === false){
-  //       this.setState({ edit: true });
-  //     } else {
-  //       this.setState({ edit: false });
-  //     }
-  // }
-
   renderSelectedNote() {
     let content;
-    // let myNotesLi = this.props.notes.map((note, i) => {
 
     if (this.state.edit === false) {
-      // let newNote = this.props.notes[this.props.newNote];
-      // if(!this.props.edit) {
         content = (
           <div>
-            <p>{this.props.note.note}</p>
+            <p>{this.props.note}</p>
           </div>
         );
-      // }
     } else {
         content = (
           <div>
-            <input defaultValue={this.props.note.note} ref="editNoteInput"/>
-            <button className="btn btn-warning btn-xs" onClick={this.editCurrentNote}>Save</button>
+            <input defaultValue={this.props.note} ref="editNoteInput"/>
+            <button className="btn btn-warning btn-xs" onClick={this.props.editCurrentNote}>
+              Save
+              {" "}
+              <span className="glyphicon glyphicon-piggy-bank" aria-hidden="true">
+              </span>
+            </button>
           </div>
         );
       }
-    // });
     return content;
   }
 
@@ -60,11 +51,15 @@ class MyStoryListItem extends React.Component {
         <li className="list-group-item">
           {this.props.myListStory.myListStory}
           {" "}
-          <button type="button" className="btn btn-warning btn-xs" onClick={this.handleEdit}>Edit Note</button>
+          <button type="button" className="btn btn-warning btn-xs" onClick={this.handleEdit}>
+            Add Note
+            {" "}
+            <span className="glyphicon glyphicon-pencil" aria-hidden="true">
+            </span>
+          </button>
           {" "}
-          <button bsStyle="info" className="btn btn-info btn-xs" onClick={this.handleDelete}>
-            <span class="glyphicon glyphicon-trash" aria-hidden="true">
-            Delete
+          <button type="button" className="btn btn-info btn-xs" onClick={this.handleDelete}>
+            <span className="glyphicon glyphicon-trash" aria-hidden="true">
             </span>
           </button>
           <br />

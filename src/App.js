@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import MyList from './component/MyList';
-// import Notes from './component/Notes';
 import TopStories from './component/TopStories';
 import Story from './component/Story';
 
@@ -17,7 +16,6 @@ class App extends Component {
       myListArr: [],
       myListStory: '',
       note: '',
-      notes: [],
     }
     this.getRequestNYT = this.getRequestNYT.bind(this);
     this.setStories = this.setStories.bind(this);
@@ -25,9 +23,7 @@ class App extends Component {
     this.addToList = this.addToList.bind(this);
     this.deleteStory = this.deleteStory.bind(this);
     this.addNote = this.addNote.bind(this);
-    // this.enableEditMode = this.enableEditMode.bind(this);
     this.editCurrentNote = this.editCurrentNote.bind(this);
-    // this.renderSelectedNote = this.renderSelectedNote.bind(this);
   }
 
   componentDidMount() {
@@ -70,7 +66,6 @@ class App extends Component {
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.get(firebaseURL)
       .then((response) => {
-        // console.log(response);
         const data = response.data;
         let myListArr = [];
           if(data) {
@@ -119,10 +114,6 @@ class App extends Component {
     this.setState({ note: noteIext });
   }
 
-  // enableEditMode() {
-  //   this.setState({ edit: true });
-  // }
-
   editCurrentNote(noteText) {
     let newNote = { note: noteText};
     newNote.note = this.refs.editNoteInput;
@@ -132,14 +123,10 @@ class App extends Component {
       method: "PATCH",
       data: newNote,
       }).then((response) => {
-      // let note = this.state.note;
       let notes = this.state.note;
       let i = response.data.name;
       notes[i] = newNote;
       this.setState({
-        // note: this.state.note,
-        // notes: notes[i],
-        // edit: false
         notes: notes,
         edit: false
       });
@@ -148,38 +135,10 @@ class App extends Component {
     })
   }
 
-  // renderSelectedNote() {
-  //   let content;
-
-  //   if (this.state.newNote) {
-  //     let newNote = this.state.notes[this.state.newNote];
-  //     if(!this.state.edit) {
-  //       content = (
-  //         <div>
-  //           <div className="d-flex justify-content-end mb-3">
-  //             <button onClick={this.enableEditMode}>Edit</button>
-  //           </div>
-  //           <h1>{newNote.note}</h1>
-  //         </div>
-  //       );
-  //     } else {
-  //       content = (
-  //         <div>
-  //           <div className="d-flex justify-content-end mb-3">
-  //             <button onClick={this.editCurrentNote}>Save</button>
-  //           </div>
-  //           <input className="w-100" defaultValue={newNote.note} ref="editNoteInput"/>
-  //         </div>
-  //       );
-  //     }
-  //   }
-  //   return content;
-  // }
-
   render() {
     return (
       <div className="App">
-      <h1 className="jumbotron">Most Popular New York Times Headlines</h1>
+      <h1 className="jumbotron">Most Popular New York Times Articles</h1>
         <div className="stories">
           <div className="topStoriesListWithHeader">
           <h1>Top Stories</h1>
@@ -205,10 +164,8 @@ class App extends Component {
           <MyList
             myListArr={this.state.myListArr}
             deleteStory={this.deleteStory}
-            // enableEditMode={this.enableEditMode}
             addNote={this.addNote}
             editCurrentNote={this.editCurrentNote}
-            notes={this.state.notes}
             note={this.state.note}
           />
         </div>

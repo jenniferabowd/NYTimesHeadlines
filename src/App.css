@@ -14,12 +14,11 @@
 .myListNotes {
   display: flex;
   justify-content: center;
-  /*align-items: center;
-  align-content: center;*/
   margin: 0 auto;
   width: 620px;
   height: 350px;
   overflow: scroll;
+  text-align: center;
 }
 
 .topStoriesList {
@@ -28,6 +27,7 @@
   overflow: scroll;
   text-align: left;
   line-height: 25px;
+  text-align: center;
 }
 
 .abstract {
@@ -36,7 +36,6 @@
 }
 
 .story {
-  margin: 10px;
   text-align: center;
 }
 
@@ -45,4 +44,7 @@ h1 {
   text-align: center;
 }
 
+a, p, h4 {
+  padding: 10px;
+}
 
