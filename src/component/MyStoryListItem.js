@@ -29,7 +29,7 @@ class MyStoryListItem extends React.Component {
             <button onClick={this.handleEdit}>Add Note</button>
             <button onClick={this.handleDelete}>Delete</button>
             <ul>
-              <li>{this.props.notes[i]}</li>
+              <li>{this.props.notes[i].note}</li>
               <button onClick={this.enableEditMode}>Edit</button>
             </ul>
           </li>
@@ -42,7 +42,7 @@ class MyStoryListItem extends React.Component {
             <button onClick={this.handleEdit}>Add Note</button>
             <button onClick={this.handleDelete}>Delete</button>
               <div>
-                <input defaultValue={this.props.notes[i]} ref="editNoteInput"/>
+                <input defaultValue={this.props.notes[i].note} ref="editNoteInput"/>
                 <button onClick={this.editCurrentNote}>Save</button>
               </div>
           </li>

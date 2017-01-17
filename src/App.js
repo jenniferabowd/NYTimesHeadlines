@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   getRequestNYT() {
-    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
+    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=24a8cf49ab2649bba4126888236dc793'
     axios.get(nyTimesUrl)
       .then((response) => {
         const data = response.data.results;
@@ -130,10 +130,17 @@ class App extends Component {
       method: "PATCH",
       data: newNote,
       }).then((response) => {
+      // let note = this.state.note;
       let notes = this.state.note;
       let i = response.data.name;
       notes[i] = newNote;
-      this.setState({ notes: notes, edit: false });
+      this.setState({
+        // note: this.state.note,
+        // notes: notes[i],
+        // edit: false
+        notes: notes,
+        edit: false
+      });
     }).catch((error) => {
       console.log(error);
     })
@@ -171,12 +178,14 @@ class App extends Component {
     return (
       <div className="App">
         <div className="stories">
-          <div className="topStoriesList">
+          <div className="topStoriesListWithHeader">
           <h1>Top Stories</h1>
-            <TopStories
-              topStories={this.state.topStories}
-              setStories={this.setStories}
-            />
+            <div className="topStoriesList">
+              <TopStories
+                topStories={this.state.topStories}
+                setStories={this.setStories}
+              />
+            </div>
           </div>
           <div className="abstract">
             <Story
