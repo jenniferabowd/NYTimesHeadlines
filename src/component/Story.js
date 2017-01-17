@@ -5,7 +5,7 @@ class Story extends React.Component {
     let viewStory;
     if(this.props.currentStoryUrl) {
       viewStory = (
-        <div>
+        <div className="panel panel-default">
           <p>{this.props.currentStoryTitle}</p>
           <p>{this.props.currentStoryAbstract}</p>
           <a href={this.props.currentStoryUrl}>{this.props.currentStoryUrl}</a>
@@ -15,7 +15,7 @@ class Story extends React.Component {
           <div>
             <h1>Selected Story</h1>
             <div>{viewStory}</div>
-                <button onClick={ () => this.props.addToList(this.props.myListStory)}>
+                <button bsStyle="info" className="btn btn-info btn-xs" onClick={ () => this.props.addToList(this.props.myListStory)}>
                   Add to List
                 </button>
           </div>
@@ -24,7 +24,7 @@ class Story extends React.Component {
       return (
         <div className="story">
           <h1>Story</h1>
-          <div>
+          <div className="panel panel-default">
             <h3>Click on an article name to learn more</h3>
           </div>
         </div>

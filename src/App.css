@@ -12,7 +12,12 @@
 .myListNotes {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  /*align-items: center;
+  align-content: center;*/
+  margin: 0 auto;
+  width: 620px;
+  height: 350px;
+  overflow: scroll;
 }
 
 .topStoriesList {
@@ -38,7 +43,4 @@ h1 {
   text-align: center;
 }
 
-/*button {
-  justify-content: right;
-}*/
 

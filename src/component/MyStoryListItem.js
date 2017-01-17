@@ -47,7 +47,7 @@ class MyStoryListItem extends React.Component {
         content = (
           <div>
             <input defaultValue={this.props.note.note} ref="editNoteInput"/>
-            <button onClick={this.editCurrentNote}>Save</button>
+            <button className="btn btn-warning btn-xs" onClick={this.editCurrentNote}>Save</button>
           </div>
         );
       }
@@ -57,12 +57,16 @@ class MyStoryListItem extends React.Component {
 
    render() {
     return(
-        <li>
+        <li className="list-group-item">
           {this.props.myListStory.myListStory}
           {" "}
-          <button type="button" className="btn btn-warning" bsSize="xsmall" onClick={this.handleEdit}>Edit Note</button>
+          <button type="button" className="btn btn-warning btn-xs" onClick={this.handleEdit}>Edit Note</button>
           {" "}
-          <button bsStyle="info" className="btn btn-info" bsSize="xsmall" onClick={this.handleDelete}>Delete</button>
+          <button bsStyle="info" className="btn btn-info btn-xs" onClick={this.handleDelete}>
+            <span class="glyphicon glyphicon-trash" aria-hidden="true">
+            Delete
+            </span>
+          </button>
           <br />
           {this.renderSelectedNote()}
         </li>

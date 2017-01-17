@@ -19,10 +19,9 @@ class MyList extends React.Component {
     });
     return(
       <div>
-        <h1>My List</h1>
-        <ol>
+        <ul className="list-group">
             {myListLi}
-        </ol>
+        </ul>
       </div>
     );
   }
