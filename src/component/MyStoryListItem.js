@@ -39,32 +39,31 @@ class MyStoryListItem extends React.Component {
       // if(!this.props.edit) {
         content = (
           <div>
-            <p>{this.props.notes.myNotesP}</p>
+            <p>{this.props.note.note}</p>
           </div>
         );
       // }
     } else {
         content = (
           <div>
-            <input defaultValue={this.props.notes.myNotesLi} ref="editNoteInput"/>
-            { <button onClick={this.editCurrentNote}>Save</button> }
+            <input defaultValue={this.props.note.note} ref="editNoteInput"/>
+            <button onClick={this.editCurrentNote}>Save</button>
           </div>
-          // this.setState({ edit: false });
         );
-        // this.setState({ edit: false });
       }
     // });
-    // this.setState({ edit: false });
     return content;
-    // this.setState({ edit: false });
   }
 
    render() {
     return(
         <li>
           {this.props.myListStory.myListStory}
-          <button onClick={this.handleEdit}>Edit Note</button>
-          <button onClick={this.handleDelete}>Delete</button>
+          {" "}
+          <button type="button" className="btn btn-warning" bsSize="xsmall" onClick={this.handleEdit}>Edit Note</button>
+          {" "}
+          <button bsStyle="info" className="btn btn-info" bsSize="xsmall" onClick={this.handleDelete}>Delete</button>
+          <br />
           {this.renderSelectedNote()}
         </li>
     );

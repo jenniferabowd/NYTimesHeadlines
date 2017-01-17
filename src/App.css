@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -31,9 +30,15 @@
 
 .story {
   margin: 10px;
+  text-align: center;
 }
 
 h1 {
   color: #7a8990;
+  text-align: center;
 }
+
+/*button {
+  justify-content: right;
+}*/
 

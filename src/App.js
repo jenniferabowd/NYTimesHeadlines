@@ -77,7 +77,8 @@ class App extends Component {
             myListArr = Object.keys(data).map((id) => {
               return {
                 id: id,
-                myListStory: data[id].article
+                myListStory: data[id].article,
+                note: data[id].note,
               }
             });
           }
@@ -93,12 +94,13 @@ class App extends Component {
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.post(firebaseURL, {
       article: this.state.currentStoryTitle,
-      note: ''
+      note: this.state.note,
     })
       .then(() => {
         this.getRequestFirebase();
         this.setState({
-          myListStory: this.state.currentStoryTitle
+          myListStory: this.state.currentStoryTitle,
+          note: this.state.note,
         })
       })
       .catch((error) => {
