@@ -179,7 +179,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <h1 className="jumbotron">Top New York Times Headlines</h1>
+      <h1 className="jumbotron">Most Popular New York Times Headlines</h1>
         <div className="stories">
           <div className="topStoriesListWithHeader">
           <h1>Top Stories</h1>

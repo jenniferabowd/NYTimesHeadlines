@@ -6,7 +6,7 @@ class Story extends React.Component {
     if(this.props.currentStoryUrl) {
       viewStory = (
         <div className="panel panel-default">
-          <p>{this.props.currentStoryTitle}</p>
+          <h4>{this.props.currentStoryTitle}</h4>
           <p>{this.props.currentStoryAbstract}</p>
           <a href={this.props.currentStoryUrl}>{this.props.currentStoryUrl}</a>
         </div>

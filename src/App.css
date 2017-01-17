@@ -1,5 +1,7 @@
 .App {
   font-family: 'Poppins', sans-serif;
+  overflow-wrap: normal;
+  overflow-wrap: break-word;
 }
 
 .stories {
