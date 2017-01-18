@@ -77,6 +77,7 @@ class App extends Component {
               }
             });
           }
+          myListArr.reverse();
           this.setState({ myListArr })
       })
       .catch((error) => {
