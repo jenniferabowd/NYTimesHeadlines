@@ -125,7 +125,7 @@ class App extends Component {
       }).then((response) => {
       let myNewListArr = [...this.state.myListArr];
       myNewListArr[index].note = newNote;
-      console.log(myNewListArr);
+      this.getRequestFirebase()
     this.setState({
       myListArr: myNewListArr,
       edit: false,
