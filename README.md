@@ -32,7 +32,8 @@ I decided to try to wireframe using pen and paper to decide what wireframe metho
 
 ## Unsolved Problems
 - Get the note to render on the page without refreshing.
-- Get rid of the add note button when the edit function is activated. 
+- Get rid of the add note button when the edit function is activated.
+- Be able to delete the note. 
 
 
 
