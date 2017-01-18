@@ -9,7 +9,6 @@ class MyList extends React.Component {
           key={i}
           myListStory={myListStory}
           deleteStory={this.props.deleteStory}
-          addNote={this.addNote}
           editCurrentNote={this.props.editCurrentNote}
           note={myListStory.note}
           index={i}

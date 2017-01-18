@@ -10,7 +10,6 @@ class MyStoryListItem extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.renderSelectedNote = this.renderSelectedNote.bind(this);
-    // console.log(props);
   }
 
   handleDelete() {
@@ -19,7 +18,6 @@ class MyStoryListItem extends React.Component {
 
   handleEdit() {
     this.setState({ edit: !(this.state.edit) });
-    // console.log(this.state);
   }
 
   renderSelectedNote() {

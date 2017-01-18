@@ -22,7 +22,6 @@ class App extends Component {
     this.getRequestFirebase = this.getRequestFirebase.bind(this);
     this.addToList = this.addToList.bind(this);
     this.deleteStory = this.deleteStory.bind(this);
-    this.addNote = this.addNote.bind(this);
     this.editCurrentNote = this.editCurrentNote.bind(this);
   }
 
@@ -111,10 +110,6 @@ class App extends Component {
     });
   }
 
-  addNote(noteIext) {
-    this.setState({ note: noteIext });
-  }
-
   editCurrentNote(myListStory, newNote, index) {
     console.log(newNote);
     axios({
@@ -165,7 +160,6 @@ class App extends Component {
           <MyList
             myListArr={this.state.myListArr}
             deleteStory={this.deleteStory}
-            addNote={this.addNote}
             editCurrentNote={this.editCurrentNote}
             note={this.state.note}
           />
