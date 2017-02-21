@@ -8,6 +8,7 @@ import Story from './component/Story';
 class App extends Component {
   constructor(props) {
     super(props);
+    // sets the inital state
     this.state = {
       topStories: [],
       currentStoryAbstract: '',
@@ -17,6 +18,7 @@ class App extends Component {
       myListStory: '',
       note: '',
     }
+    // binds all methods
     this.getRequestNYT = this.getRequestNYT.bind(this);
     this.setStories = this.setStories.bind(this);
     this.getRequestFirebase = this.getRequestFirebase.bind(this);
@@ -24,14 +26,15 @@ class App extends Component {
     this.deleteStory = this.deleteStory.bind(this);
     this.editCurrentNote = this.editCurrentNote.bind(this);
   }
-
+  // loads the getRequests from Firebase and NY Times once the page loads
   componentDidMount() {
     this.getRequestNYT();
     this.getRequestFirebase();
   }
 
+  // NY Times get request
   getRequestNYT() {
-    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
+    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=24a8cf49ab2649bba4126888236dc793'
     axios.get(nyTimesUrl)
       .then((response) => {
         const data = response.data.results;
@@ -39,6 +42,7 @@ class App extends Component {
           if(data) {
             topStories = Object.keys(data).map((id) => {
               const story = data[id];
+              // returns the items from the API that we want for each story
               return {
                 id: id,
                 topArticleTitle: story.title,
@@ -47,12 +51,14 @@ class App extends Component {
               }
              });
           }
+          // sets tthe state for the top stories
         this.setState({ topStories });
       })
       .catch((error) => {
        });
   }
 
+// renders the current state
   setStories(i) {
     this.setState({
       currentStoryUrl: this.state.topStories[i].storyUrl,
@@ -61,6 +67,7 @@ class App extends Component {
     })
   }
 
+// get request from Firebase for myList
   getRequestFirebase() {
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.get(firebaseURL)
@@ -84,6 +91,7 @@ class App extends Component {
       })
   };
 
+// adds story to myList
   addToList(myListStory) {
     console.log('clicked')
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
@@ -103,6 +111,7 @@ class App extends Component {
       })
   };
 
+// deletes story
   deleteStory(myListStory) {
     axios.delete(`https://ny-times-app.firebaseio.com/mylist/${myListStory.id}/.json`)
     .then((response) => {
@@ -110,6 +119,7 @@ class App extends Component {
     });
   }
 
+// edits current story note
   editCurrentNote(myListStory, newNote, index) {
     console.log(newNote);
     axios({
@@ -130,6 +140,7 @@ class App extends Component {
     })
   }
 
+// what is rendered and passes props
   render() {
     return (
       <div className="App">

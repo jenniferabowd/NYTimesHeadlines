@@ -1,6 +1,6 @@
 # New York Times Headlines
 A React App showing the top NY Times headlines.
-You can view my app by clicking [here].(https://ns-owgksyisla.now.sh/)
+You can view my app by clicking [here].(https://ns-nwzqntoktc.now.sh/)
 
 ## Technologies Used
 -HTML5
