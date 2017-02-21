@@ -34,7 +34,7 @@ class App extends Component {
 
   // NY Times get request
   getRequestNYT() {
-    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=24a8cf49ab2649bba4126888236dc793'
+    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
     axios.get(nyTimesUrl)
       .then((response) => {
         const data = response.data.results;
