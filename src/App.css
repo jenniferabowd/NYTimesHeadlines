@@ -8,7 +8,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  flex-wrap: wrap;
   margin: 10px;
+}
+
+.myList {
+  padding: 25px;
 }
 
 .myListNotes {

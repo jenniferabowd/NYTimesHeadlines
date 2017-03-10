@@ -34,7 +34,7 @@ class App extends Component {
 
   // NY Times get request
   getRequestNYT() {
-    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
+    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=24a8cf49ab2649bba4126888236dc793'
     axios.get(nyTimesUrl)
       .then((response) => {
         const data = response.data.results;
@@ -166,14 +166,16 @@ class App extends Component {
           </div>
         </div>
         <br />
-        <h1>My List</h1>
-        <div className="myListNotes">
-          <MyList
-            myListArr={this.state.myListArr}
-            deleteStory={this.deleteStory}
-            editCurrentNote={this.editCurrentNote}
-            note={this.state.note}
-          />
+        <div className="myList">
+          <h1>My List</h1>
+          <div className="myListNotes">
+            <MyList
+              myListArr={this.state.myListArr}
+              deleteStory={this.deleteStory}
+              editCurrentNote={this.editCurrentNote}
+              note={this.state.note}
+            />
+          </div>
         </div>
       </div>
     );
