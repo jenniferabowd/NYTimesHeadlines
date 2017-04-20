@@ -11,12 +11,19 @@ class App extends Component {
     super(props);
     // sets the inital state
     this.state = {
+      // this will hold all the top story headlines
       topStories: [],
-      currentStoryAbstract: '',
+      // this will hold the current story title
       currentStoryTitle: '',
+      // this will hold the current story abstract
+      currentStoryAbstract: '',
+      // this will hold the current story url
       currentStoryUrl: '',
+      // this will hold the items in my list
       myListArr: [],
+      // this will beach each story in my list
       myListStory: '',
+      // this will be the note for each story
       note: '',
     }
     // binds all methods
@@ -38,8 +45,11 @@ class App extends Component {
     const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
     axios.get(nyTimesUrl)
       .then((response) => {
+        // this puts the API response into data
         const data = response.data.results;
+        // this calls the top stories variable
         let topStories = [];
+          // says if there is data, then make each item a story varable
           if(data) {
             topStories = Object.keys(data).map((id) => {
               const story = data[id];
