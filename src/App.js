@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import dotenv from 'dotenv';
 import './App.css';
 import MyList from './component/MyList';
 import TopStories from './component/TopStories';
