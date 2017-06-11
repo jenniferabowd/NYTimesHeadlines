@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class MyStoryListItem extends React.Component {
   constructor(props) {
-    console.log('constructing mystorylist');
     super(props)
     this.state = {
       edit: false,
@@ -22,7 +21,6 @@ class MyStoryListItem extends React.Component {
 
   renderSelectedNote() {
     let content;
-
     if (this.state.edit === false) {
         content = (
           <div>
@@ -50,17 +48,17 @@ class MyStoryListItem extends React.Component {
         <li className="list-group-item">
           {this.props.myListStory.myListStory}
           {" "}
-          <button type="button" className="btn btn-warning btn-xs" onClick={this.handleEdit}>
+          <div className="btn btn-warning btn-xs" onClick={this.handleEdit}>
             Add Note
             {" "}
             <span className="glyphicon glyphicon-pencil" aria-hidden="true">
             </span>
-          </button>
+          </div>
           {" "}
-          <button type="button" className="btn btn-info btn-xs" onClick={this.handleDelete}>
+          <div type="button" className="btn btn-info btn-xs" onClick={this.handleDelete}>
             <span className="glyphicon glyphicon-trash" aria-hidden="true">
             </span>
-          </button>
+          </div>
           <br />
           {this.renderSelectedNote()}
         </li>
