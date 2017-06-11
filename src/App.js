@@ -119,12 +119,15 @@ class App extends Component {
 // adds story to myList
   addToList(myListStory) {
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
+    // this add the current storyTitle to the database along with an empty note
     axios.post(firebaseURL, {
       article: this.state.currentStoryTitle,
       note: this.state.note,
     })
       .then(() => {
+        // after you add the story to myList, it does another getRequestFirebase
         this.getRequestFirebase();
+        // sets the state from that getRequest to myListStory and note
         this.setState({
           myListStory: this.state.currentStoryTitle,
           note: this.state.note,
@@ -137,28 +140,34 @@ class App extends Component {
 
 // deletes story
   deleteStory(myListStory) {
+    // deletes the current story from Firebase
     axios.delete(`https://ny-times-app.firebaseio.com/mylist/${myListStory.id}/.json`)
     .then((response) => {
+      // then does another getRequestFirebase
       this.getRequestFirebase();
     });
   }
 
 // edits current story note
   editCurrentNote(myListStory, newNote, index) {
-    console.log(newNote);
     axios({
-      url: `/mylist/${myListStory.id}.json`,
       baseURL: 'https://ny-times-app.firebaseio.com/',
+      url: `/mylist/${myListStory.id}.json`,
       method: "PATCH",
+      // sets up how the data will be passed
       data: {note: newNote},
-      }).then((response) => {
+    }).then((response) => {
+      // sets the new list array to the following
       let myNewListArr = [...this.state.myListArr];
+      // sets the note to the newNote
       myNewListArr[index].note = newNote;
+      // does another getRequestFirebase
       this.getRequestFirebase()
-    this.setState({
-      myListArr: myNewListArr,
-      edit: false,
-    });
+      // sets the state of myListArr and edit
+      this.setState({
+        myListArr: myNewListArr,
+        edit: false,
+      });
     }).catch((error) => {
       console.log(error);
     })
