@@ -42,19 +42,24 @@ class App extends Component {
 
   // NY Times get request
   getRequestNYT() {
+    // NY Times API variable
     const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
+    // API get request using Axios
     axios.get(nyTimesUrl)
+      // once you do the get request, process the response
       .then((response) => {
-        // this puts the API response into data
+        // this puts the API response into a data variable
         const data = response.data.results;
         // this calls the top stories variable
         let topStories = [];
-          // says if there is data, then make each item a story varable
+          // says if there is data, then add the top stories into the topStories array
           if(data) {
             topStories = Object.keys(data).map((id) => {
+              // each item of data is stored in a variable of story
               const story = data[id];
               // returns the items from the API that we want for each story
               return {
+                // this sets the id, topArticleTitle, storyUrl, and abstract to how it is stored in the story variable
                 id: id,
                 topArticleTitle: story.title,
                 storyUrl: story.url,
@@ -65,11 +70,12 @@ class App extends Component {
           // sets tthe state for the top stories
         this.setState({ topStories });
       })
+      // error handler
       .catch((error) => {
        });
   }
 
-// renders the current state
+// this sets the state for the item clicked on that will render in the current story box
   setStories(i) {
     this.setState({
       currentStoryUrl: this.state.topStories[i].storyUrl,
@@ -80,21 +86,30 @@ class App extends Component {
 
 // get request from Firebase for myList
   getRequestFirebase() {
+    // sets the api request from firebase into a variable
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
+    // api get request
     axios.get(firebaseURL)
       .then((response) => {
+        // sets the response data into a variable
         const data = response.data;
+        // creates an empty myListArr variable
         let myListArr = [];
+        // if data, it does the following
           if(data) {
+            // it sets each object in Firebase to the variable myListArr
             myListArr = Object.keys(data).map((id) => {
               return {
+                // stores each item to this
                 id: id,
                 myListStory: data[id].article,
                 note: data[id].note,
               }
             });
           }
+          // shows the story from most recently added to the last
           myListArr.reverse();
+          // sets the state for myListArr
           this.setState({ myListArr })
       })
       .catch((error) => {
@@ -104,7 +119,6 @@ class App extends Component {
 
 // adds story to myList
   addToList(myListStory) {
-    console.log('clicked')
     const firebaseURL = 'https://ny-times-app.firebaseio.com/mylist/.json'
     axios.post(firebaseURL, {
       article: this.state.currentStoryTitle,

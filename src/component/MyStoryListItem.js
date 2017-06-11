@@ -45,7 +45,7 @@ class MyStoryListItem extends React.Component {
     return content;
   }
 
-   render() {
+  render() {
     return(
         <li className="list-group-item">
           {this.props.myListStory.myListStory}
