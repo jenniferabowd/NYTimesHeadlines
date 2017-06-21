@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class MyStoryListItem extends React.Component {
   constructor(props) {

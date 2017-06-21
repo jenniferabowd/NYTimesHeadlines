@@ -62,7 +62,7 @@ class App extends Component {
                 id: id,
                 topArticleTitle: story.title,
                 storyUrl: story.url,
-                abstract: story.abstract,
+                abstract: story.abstract
               }
              });
           }

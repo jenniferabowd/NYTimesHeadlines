@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class Story extends React.Component {
   // this renders the current story div with either the story or telling you to click on a headline for more information
