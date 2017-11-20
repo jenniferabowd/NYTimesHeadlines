@@ -16,7 +16,7 @@ class MyStoryListItem extends React.Component {
   }
 
   handleEdit() {
-    this.setState({ edit: true });
+    this.setState({ edit: !(this.state.edit) });
   }
 
   renderSelectedNote() {
@@ -24,12 +24,6 @@ class MyStoryListItem extends React.Component {
     if (this.state.edit === false) {
         content = (
           <div>
-            <div className="btn btn-warning btn-xs" onClick={this.handleEdit}>
-            Add Note
-            {" "}
-            <span className="glyphicon glyphicon-pencil" aria-hidden="true">
-            </span>
-          </div>
             <p>{this.props.note}</p>
           </div>
         );
@@ -37,7 +31,7 @@ class MyStoryListItem extends React.Component {
         content = (
           <div>
             <input defaultValue={this.props.note} ref={(input) => this.input = input}/>
-            <button className="btn btn-warning btn-xs" onClick={() => {this.props.editCurrentNote(this.setState({ edit: false}), this.props.myListStory, this.input.value, this.props.index )} }>
+            <button className="btn btn-warning btn-xs" onClick={() => {this.props.editCurrentNote(this.props.myListStory, this.input.value, this.props.index)} }>
               Save
               {" "}
               <span className="glyphicon glyphicon-piggy-bank" aria-hidden="true">
@@ -53,6 +47,13 @@ class MyStoryListItem extends React.Component {
     return(
         <li className="list-group-item">
           {this.props.myListStory.myListStory}
+          {" "}
+          <div className="btn btn-warning btn-xs" onClick={this.handleEdit}>
+            Add Note
+            {" "}
+            <span className="glyphicon glyphicon-pencil" aria-hidden="true">
+            </span>
+          </div>
           {" "}
           <div type="button" className="btn btn-info btn-xs" onClick={this.handleDelete}>
             <span className="glyphicon glyphicon-trash" aria-hidden="true">
