@@ -4,6 +4,7 @@ import './App.css';
 import MyList from './component/MyList';
 import TopStories from './component/TopStories';
 import Story from './component/Story';
+// import config from 'config.js';
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class App extends Component {
       myListStory: '',
       // this will be the note for each story
       note: '',
+      edit: false,
     }
     // binds all methods
     this.getRequestNYT = this.getRequestNYT.bind(this);
@@ -41,8 +43,10 @@ class App extends Component {
 
   // NY Times get request
   getRequestNYT() {
+    // var mykey = config.MY_KEY;
+
     // NY Times API variable
-    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
+    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=24a8cf49ab2649bba4126888236dc793'
     // API get request using Axios
     axios.get(nyTimesUrl)
       // once you do the get request, process the response
@@ -166,7 +170,6 @@ class App extends Component {
       // sets the state of myListArr and edit
       this.setState({
         myListArr: myNewListArr,
-        edit: false,
       });
     }).catch((error) => {
       console.log(error);
@@ -207,6 +210,7 @@ class App extends Component {
               deleteStory={this.deleteStory}
               editCurrentNote={this.editCurrentNote}
               note={this.state.note}
+              edit={this.state.edit}
             />
           </div>
         </div>
