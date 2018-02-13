@@ -1,6 +1,6 @@
 # New York Times Headlines
 A React App showing the top NY Times headlines.
-You can view my app by clicking [here](nytimes-headlines.bitballoon.com).
+You can view my app by clicking [here](http://nytimes-headlines.bitballoon.com/).
 
 ## Technologies Used
 - HTML5
@@ -32,7 +32,6 @@ I decided to try to wireframe using pen and paper to decide what wireframe metho
 - Then in a third div get the article headline to be added along with an editable note.
 
 ## Unsolved Problems
-- Get rid of the add note button when the edit function is activated.
 - Be able to delete the note. 
 
 
