@@ -46,7 +46,7 @@ class App extends Component {
     // var mykey = config.MY_KEY;
 
     // NY Times API variable
-    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key='
+    const nyTimesUrl = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=24a8cf49ab2649bba4126888236dc793'
     // API get request using Axios
     axios.get(nyTimesUrl)
       // once you do the get request, process the response
