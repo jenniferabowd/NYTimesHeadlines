@@ -4,7 +4,6 @@ import './App.css';
 import MyList from './component/MyList';
 import TopStories from './component/TopStories';
 import Story from './component/Story';
-// import config from 'config.js';
 
 class App extends Component {
   constructor(props) {
