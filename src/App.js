@@ -56,9 +56,12 @@ class App extends Component {
         let topStories = [];
           // says if there is data, then add the top stories into the topStories array
           if(data) {
+            console.log('data:', data)
+            console.log('Object.keys(data)', Object.keys(data))
             topStories = Object.keys(data).map((id) => {
               // each item of data is stored in a variable of story
               const story = data[id];
+              console.log('story:', story)
               // returns the items from the API that we want for each story
               return {
                 // this sets the id, topArticleTitle, storyUrl, and abstract to how it is stored in the story variable
@@ -69,7 +72,7 @@ class App extends Component {
               }
              });
           }
-          // sets tthe state for the top stories
+          // sets the state for the top stories
         this.setState({ topStories });
       })
       // error handler
