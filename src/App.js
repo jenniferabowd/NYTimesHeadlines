@@ -56,8 +56,6 @@ class App extends Component {
         let topStories = [];
           // says if there is data, then add the top stories into the topStories array
           if(data) {
-            console.log('data:', data)
-            console.log('Object.keys(data)', Object.keys(data))
             topStories = Object.keys(data).map((id) => {
               // each item of data is stored in a variable of story
               const story = data[id];
@@ -77,7 +75,8 @@ class App extends Component {
       })
       // error handler
       .catch((error) => {
-       });
+      console.error(error)
+    });
   }
 
 // this sets the state for the item clicked on that will render in the current story box
