@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://jenniferkaplannyc.github.io/NYTimesHeadlines",
   "devDependencies": {
-    "react-scripts": "0.8.5"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "axios": "^0.21.1",
